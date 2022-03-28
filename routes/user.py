@@ -40,5 +40,5 @@ def delete_user(id: int):
 @user.put('/users/{id}')
 def update_user(id: int, user: User):
     conn.execute(users.update().values(name=user.name, email=user.email,
-                 password=user.password).where(users.c.id == id))
-    return 'updated'
+                 password=f.encrypt(user.password.encode('utf-8'))).where(users.c.id == id))
+    return conn.execute(users.select().where(users.c.id == id)).first()
