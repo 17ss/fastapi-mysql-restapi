@@ -24,7 +24,7 @@ def create_user(user: User):
 
 @user.get('/users/{id}')
 def get_user(id: int):
-    return conn.execute(user.select().where(users.c.id == id)).first()
+    return conn.execute(users.select().where(users.c.id == id)).first()
 
 @user.get('/users')
 def helloword():
