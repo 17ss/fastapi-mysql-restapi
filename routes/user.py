@@ -10,9 +10,11 @@ f = Fernet(key)
 
 user = APIRouter()
 
+
 @user.get('/users')
 def get_users():
     return conn.execute(users.select()).fetchall()
+
 
 @user.post('/users')
 def create_user(user: User):
@@ -23,12 +25,20 @@ def create_user(user: User):
     print(result.lastrowid)
     return conn.execute(users.select().where(users.c.id == result.lastrowid)).first()
 
+
 @user.get('/users/{id}')
 def get_user(id: int):
     return conn.execute(users.select().where(users.c.id == id)).first()
+
 
 @user.delete('/users/{id}')
 def delete_user(id: int):
     conn.execute(users.delete().where(users.c.id == id))
     return Response(status_code=HTTP_204_NO_CONTENT)
 
+
+@user.put('/users/{id}')
+def update_user(id: int, user: User):
+    conn.execute(users.update().values(name=user.name, email=user.email,
+                 password=user.password).where(users.c.id == id))
+    return 'updated'
