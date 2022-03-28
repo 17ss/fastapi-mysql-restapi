@@ -11,7 +11,9 @@ f = Fernet(key)
 user = APIRouter()
 
 
-@user.get("/users")
+@user.get(
+    "/users"
+)
 def get_users():
     return conn.execute(users.select()).fetchall()
 
