@@ -4,6 +4,7 @@ from models.user import users
 from schemas.user import User
 from cryptography.fernet import Fernet
 from starlette.status import HTTP_204_NO_CONTENT
+from typing import List
 
 key = Fernet.generate_key()
 f = Fernet(key)
