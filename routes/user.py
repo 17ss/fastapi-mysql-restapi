@@ -12,7 +12,10 @@ user = APIRouter()
 
 
 @user.get(
-    "/users"
+    "/users",
+    tags=["users"],
+    response_model=List[User],
+    description="Get a list of all users",
 )
 def get_users():
     return conn.execute(users.select()).fetchall()
