@@ -4,4 +4,4 @@ user = APIRouter()
 
 @user.get('/')
 def helloword():
-    print("hello world")
+    return ("hello world")
