@@ -28,7 +28,7 @@ def get_user(id: int):
     return conn.execute(users.select().where(users.c.id == id)).first()
 
 @user.delete('/users/{id}')
-def delete_user():
+def delete_user(id: int):
     conn.execute(users.delete().where(users.c.id == id))
     return Response(status_code=HTTP_204_NO_CONTENT)
 
